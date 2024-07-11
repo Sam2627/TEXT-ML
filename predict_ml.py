@@ -9,7 +9,7 @@ import pickle
 # Process label in list str library
 from ast import literal_eval
 
-from setting_be import num_labels, st_max_seqlen, st_batch_size
+from setting_be import num_labels, st_max_seqlen, st_batch_size, load_model, load_terms
 
 # Load labels
 lookup = tf.keras.layers.StringLookup(output_mode="multi_hot")
@@ -35,10 +35,12 @@ def predict_input(input_text) -> list[str]:
     #input_text = clean_text(input_text)
 
     # Load models
-    model_for_inference = tf.keras.models.load_model('LearnML/model.keras')
+    # model_for_inference = tf.keras.models.load_model('LearnML/model.keras')
+    model_for_inference = load_model
 
     # Load terms
-    terms = pickle.load(open('LearnML/terms.pkl', 'rb'))
+    # terms = pickle.load(open('LearnML/terms.pkl', 'rb'))
+    terms = load_terms
     lookup.adapt(terms)
 
 
