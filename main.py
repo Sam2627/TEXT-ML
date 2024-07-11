@@ -76,15 +76,18 @@ def post_text(txt: TextInput) -> bool:
     else:
         return False
     
+
+#### TEST API ####
+
 # Test load model
-@app.get("/load_model")
+@app.get("/test_load_model")
 def test_load_model():
     load_model_test()
     return "Load modeled"
 
 # Test using model
-@app.get("/text_ml")
-def post_text() -> list[str]:
+@app.get("/test_text_ml")
+def test_post_text() -> list[str]:
     get_txt = "Học phí của trường"
 
     # Get length of process input text and raise error if it too short
