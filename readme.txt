@@ -10,3 +10,6 @@ Add /docs#/ after url for Swagger UI API
 - git branch -M master
 - git remote add origin "link"
 - git push -u origin master
+
+# Get new update of project
+- git fetch "link"
