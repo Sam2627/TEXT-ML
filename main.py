@@ -84,7 +84,7 @@ def test_load_model():
 
 # Test using model
 @app.get("/text_ml")
-def test_ml() -> list[str]:
+def post_text() -> list[str]:
     get_txt = "Học phí của trường"
 
     # Get length of process input text and raise error if it too short

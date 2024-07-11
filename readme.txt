@@ -6,7 +6,7 @@ Add /docs#/ after url for Swagger UI API
 # Push project to github
 - git init
 - git add .
-- git commit -m "first commit"
+- git commit -m ""
 - git branch -M master
 - git remote add origin "link"
 - git push -u origin master
