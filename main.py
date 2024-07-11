@@ -10,10 +10,6 @@ from predict_ml import predict_input
 from train_ml import train_ml
 from test_api import load_model_test
 
-#### Test load model ####
-import tensorflow as tf
-main_load_model = tf.keras.models.load_model('LearnML/model.keras')
-
 app = FastAPI(
     title="Machine Learing API",
     description="ML model for answer common question",
@@ -83,24 +79,23 @@ def post_text(txt: TextInput) -> bool:
 
 #### TEST API ####
 
-# Test load model
-@app.get("/test_load_model")
-def test_load_model():
-    load_model_test()
-    return "Load modeled"
+# # Test load model
+# @app.get("/test_load_model")
+# def test_load_model():
+#     load_model_test()
+#     return "Load modeled"
 
-# Test using model
-@app.get("/test_text_ml")
-def test_post_text() -> list[str]:
-    get_txt = "Học phí của trường"
+# # Test using model
+# @app.get("/test_text_ml")
+# def test_post_text() -> list[str]:
+#     get_txt = "Học phí của trường"
 
-    # Get length of process input text and raise error if it too short
-    get_txt = clean_text(get_txt)
-    num_txt = len(get_txt.split())
-    if num_txt < min_words:
-        raise HTTPException(status_code=400, detail="Câu hỏi quá ngắn!")
+#     # Get length of process input text and raise error if it too short
+#     get_txt = clean_text(get_txt)
+#     num_txt = len(get_txt.split())
+#     if num_txt < min_words:
+#         raise HTTPException(status_code=400, detail="Câu hỏi quá ngắn!")
     
-    # Otherwise keep predict input
-    result = predict_input(get_txt)
-    return result
-
+#     # Otherwise keep predict input
+#     result = predict_input(get_txt)
+#     return result
