@@ -10,6 +10,10 @@ from predict_ml import predict_input
 from train_ml import train_ml
 from test_api import load_model_test
 
+#### Test load model ####
+import tensorflow as tf
+main_load_model = tf.keras.models.load_model('LearnML/model.keras')
+
 app = FastAPI(
     title="Machine Learing API",
     description="ML model for answer common question",
