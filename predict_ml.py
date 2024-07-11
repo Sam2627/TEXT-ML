@@ -9,14 +9,14 @@ import pickle
 # Process label in list str library
 from ast import literal_eval
 
-from setting_be import num_labels
+from setting_be import num_labels, st_max_seqlen, st_batch_size
 
 # Load labels
 lookup = tf.keras.layers.StringLookup(output_mode="multi_hot")
 
 # Create data set with only row is text input
-max_seqlen = 6
-batch_size = 10
+max_seqlen = st_max_seqlen
+batch_size = st_batch_size
 padding_token = "<pad>"
 auto = tf.data.AUTOTUNE
 

@@ -12,10 +12,14 @@ from sklearn.model_selection import train_test_split
 from tensorflow import keras
 
 # Get other lib
-from setting_be import sqlconn
+from setting_be import sqlconn, st_max_seqlen, st_batch_size, st_epochs
 from clean_text import clean_text
 
-# sqlconn ="C:\Users\ASUS\Desktop\db\chatbot.db"
+# Dataset parameter
+max_seqlen = st_max_seqlen
+batch_size = st_batch_size
+padding_token = "<pad>"
+auto = tf.data.AUTOTUNE
 
 def train_ml():
     # data = pd.read_csv("C:/Users/PC/OneDrive/ThucTap/thuctap_4.4.csv", usecols = ['CauHoi', 'MaCauHoi'])
@@ -52,11 +56,6 @@ def train_ml():
     lookup = tf.keras.layers.StringLookup(output_mode="multi_hot")
     lookup.adapt(terms)
     
-    max_seqlen = 6
-    batch_size = 10
-    padding_token = "<pad>"
-    auto = tf.data.AUTOTUNE
-
     def make_dataset(dataframe, is_train=True):
         labels = tf.ragged.constant(dataframe['MaCauHoi'].values)
         label_binarized = lookup(labels).numpy()
@@ -100,7 +99,7 @@ def train_ml():
     shallow_mlp_model.compile(loss="binary_crossentropy", optimizer="adam", metrics=["binary_accuracy"])
 
     # Training model
-    epochs = 15
+    epochs = st_epochs
     shallow_mlp_model.fit(train_dataset, validation_data=validation_dataset, epochs=epochs)
     # Add layer for accept raw string and create model for inference
     model_for_inference = tf.keras.Sequential([text_vectorizer, shallow_mlp_model])

@@ -8,6 +8,7 @@ from setting_be import min_words, max_words
 from clean_text import clean_text, replace_accents
 from predict_ml import predict_input
 from train_ml import train_ml
+from test_api import load_model_test
 
 app = FastAPI(
     title="Machine Learing API",
@@ -74,4 +75,25 @@ def post_text(txt: TextInput) -> bool:
         return True
     else:
         return False
+    
+# Test load model
+@app.get("/load_model")
+def test_load_model():
+    load_model_test()
+    return "Load modeled"
+
+# Test using model
+@app.get("/text_ml")
+def test_ml() -> list[str]:
+    get_txt = "Học phí của trường"
+
+    # Get length of process input text and raise error if it too short
+    get_txt = clean_text(get_txt)
+    num_txt = len(get_txt.split())
+    if num_txt < min_words:
+        raise HTTPException(status_code=400, detail="Câu hỏi quá ngắn!")
+    
+    # Otherwise keep predict input
+    result = predict_input(get_txt)
+    return result
 
